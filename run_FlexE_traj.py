@@ -66,7 +66,7 @@ def main():
                 Back_E_ED = h.evaluate_energy( native)
                 energies[i,j] = (Forw_E_ED+Back_E_ED)/2
                 energies[j,i] = energies[i,j]
-        numpy.savetxt('Flex_matrix.txt',energies)
+        numpy.savetxt('Flex_matrix.txt',energies,fmt='%8.2f')
 
 
 
