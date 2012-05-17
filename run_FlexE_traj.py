@@ -56,6 +56,7 @@ def main():
             print Forw_E_ED,Back_E_ED
     else:
         energies = numpy.zeros((ncoor,ncoor))
+        maximum = numpy.zeros((ncoor,ncoor))
         for i in range(0,ncoor):
             native = ensemble.getCoordsets(indices=i)
             h = hamiltonian.EDENMHamiltonian( native )
@@ -66,7 +67,13 @@ def main():
                 Back_E_ED = h.evaluate_energy( native)
                 energies[i,j] = (Forw_E_ED+Back_E_ED)/2
                 energies[j,i] = energies[i,j]
+		max_number = Forw_E_ED
+		if (Back_E_ED > max_number):
+			max_number = Back_E_ED
+		maximum[i,j] = max_number
+		maximum[j,i] = max_number
         numpy.savetxt('Flex_matrix.txt',energies,fmt='%8.2f')
+        numpy.savetxt('Flex_max.txt',maximum,fmt='%8.2f')
 
 
 
